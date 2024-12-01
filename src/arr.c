@@ -5,7 +5,7 @@
 
 Array NewArray(size_t elementSize, size_t initialSize) {
     Array arr;
-    arr.data = (Data *)malloc(elementSize * initialSize);
+    arr.data = (Data *)calloc(initialSize, elementSize);
     if (arr.data == NULL) {
         perror("Failed to allocate the array");
         exit(EXIT_FAILURE);
@@ -20,7 +20,7 @@ Array NewArray(size_t elementSize, size_t initialSize) {
 }
 
 void ResizeArray(Array *arr) {
-    arr->capacity *= 2;
+    arr->capacity += 10;
     arr->data = realloc(arr->data, arr->elemSize * arr->capacity);
     if (arr->data == NULL) {
         perror("Failed to reallocate the array");
